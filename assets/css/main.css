@@ -3508,7 +3508,7 @@
  }
 
 	#banner {
-	background:url('../../images/1.jpg') center  fixed !important;
+	background:url('../../images/1.jpg') center top fixed !important;
 		z-index: 1000;
         top: 10%;
         height: 100vh;
@@ -3726,8 +3726,11 @@
 			font-size: 3em;
 			line-height: 1.45;
 			margin: 0 0 0.75em 0;
+            font-weight: bold;
 		}
-
+#banner span {
+    color: yellow;
+}
 		#banner > .inner {
 			opacity: 1;
 			-moz-transform: none;
