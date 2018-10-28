@@ -3508,8 +3508,9 @@
  }
 
 	#banner {
-	background:url('/images/1.jpg') center  fixed !important;
-		top: 10%;
+	background:url('../../images/1.jpg') center  fixed !important;
+		z-index: 1000;
+        top: 10%;
         height: 100vh;
         /*color: rgba(255, 255, 255, 0.75);*/
 		text-align: center;
