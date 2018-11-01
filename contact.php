@@ -1,37 +1,26 @@
 <?php
-
-    $to = "krzys_wszel@interia.eu";
-    $from = $_REQUEST['email'];
-    $name = $_REQUEST['name'];
-    $subject = $_REQUEST['subject'];
-    $number = $_REQUEST['number'];
-    $cmessage = $_REQUEST['message'];
-
-    $headers = "From: $from";
-	$headers = "From: " . $from . "\r\n";
-	$headers .= "Reply-To: ". $from . "\r\n";
-	$headers .= "MIME-Version: 1.0\r\n";
-	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-    $subject = "You have a message.";
-
-    $logo = '#';
-    $link = '#';
-
-	$body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
-	$body .= "<table style='width: 100%;'>";
-	$body .= "<thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>";
-	$body .= "<a href='{$link}'><img src='{$logo}' alt=''></a><br><br>";
-	$body .= "</td></tr></thead><tbody><tr>";
-	$body .= "<td style='border:none;'><strong>Name:</strong> {$name}</td>";
-	$body .= "<td style='border:none;'><strong>Email:</strong> {$from}</td>";
-	$body .= "</tr>";
-	$body .= "<tr><td style='border:none;'><strong>Subject:</strong> {$csubject}</td></tr>";
-	$body .= "<tr><td></td></tr>";
-	$body .= "<tr><td colspan='2' style='border:none;'>{$cmessage}</td></tr>";
-	$body .= "</tbody></table>";
-	$body .= "</body></html>";
-
-    $send = mail($to, $subject, $body, $headers);
-
+header("content-type: application/json; charset=utf-8");
+$name=isset($_POST['name']) ? $_POST['name'] : "";
+$email=isset($_POST['email']) ? $_POST['email'] : "";
+$phone=isset($_POST['phone']) ? $_POST['phone'] : "";
+$message=isset($_POST['message']) ? $_POST['message'] : "";
+if($name && $email   && $message){
+ $headers = "MIME-Version: 1.0\r\nContent-type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit";
+ $message_body="Formularz kontaktowy wysłany ze strony www.example.com\n";
+ $message_body.="Imię i nazwisko: $name\n";
+ $message_body.="Adres email: $email\n";
+ 
+ $message_body.=$message;
+ if(mail("krzys_wszel@interia.eu","Formularz kontaktowy",$message_body,$headers)){
+ $json=array("status"=>1,"msg"=>"<p class='status_ok'>Twój formularz został pomyślnie wysłany.</p>");
+ }
+ else{
+ $json=array("status"=>0,"msg"=>"<p class='status_err'>Wystąpił problem z wysłaniem formularza.</p>"); 
+ }
+}
+else{
+ $json=array("status"=>0,"msg"=>"<p class='status_err'>Proszę wypełnić wszystkie pola przed wysłaniem.</p>"); 
+}
+echo json_encode($json);
+exit;
 ?>
