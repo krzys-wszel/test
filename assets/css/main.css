@@ -3092,6 +3092,21 @@
 				font-weight: 700;
 			}
 
+#kontakt  {
+    background: url(../../images/napisz%20do%20mnie.jpg) no-repeat center;
+padding-bottom: 75px;
+    padding-top: 75px;
+}
+
+#kontakt .submit-btn {
+    background: #f2d205;
+     
+}
+#kontakt p {
+    color: white;
+}
+
+
 		#header nav a {
 			-moz-transition: color 0.2s ease-in-out;
 			-webkit-transition: color 0.2s ease-in-out;
